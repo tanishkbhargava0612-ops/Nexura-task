@@ -6,8 +6,325 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Maggi Recipe</title>
+    <style>
+    * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff7e6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* ---------------- HEADER ---------------- */
+
+        header {
+            background: linear-gradient(135deg, #ffcc00, #ff9900);
+            min-height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            animation: rotate 12s linear infinite;
+        }
+
+        .hero {
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 1.2s ease;
+        }
+
+        .hero h1 {
+            font-size: 70px;
+            color: #d71920;
+            text-shadow: 4px 4px white;
+            animation: bounce 2s infinite;
+        }
+
+        .hero p {
+            font-size: 22px;
+            margin: 15px 0 30px;
+        }
+
+        .hero img {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 10px solid white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+            animation: float 3s ease-in-out infinite;
+        }
+
+
+        /* ---------------- MAIN ---------------- */
+
+        main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 60px 25px;
+        }
+
+        .title {
+            text-align: center;
+            color: #d71920;
+            font-size: 40px;
+            margin-bottom: 40px;
+        }
+
+
+        /* ---------------- TIME CARDS ---------------- */
+
+        .time-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .time-card {
+            background: white;
+            padding: 20px 35px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: 0.4s;
+        }
+
+        .time-card:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .time-card h3 {
+            color: #d71920;
+            margin-bottom: 8px;
+        }
+
+        .time-card p {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+
+        /* ---------------- CONTENT GRID ---------------- */
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: 0.4s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .card h2 {
+            color: #d71920;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+
+        /* ---------------- INGREDIENTS ---------------- */
+
+        .ingredients li {
+            list-style: none;
+            padding: 12px;
+            margin: 8px 0;
+            background: #fff3cd;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .ingredients li:hover {
+            transform: translateX(10px);
+            background: #ffcc00;
+        }
+
+        .ingredients li::before {
+            content: "🍜 ";
+        }
+
+
+        /* ---------------- STEPS ---------------- */
+
+        .steps {
+            counter-reset: steps;
+        }
+
+        .steps li {
+            list-style: none;
+            counter-increment: steps;
+            margin-bottom: 20px;
+            padding-left: 55px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .steps li::before {
+            content: counter(steps);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 35px;
+            height: 35px;
+            background: #d71920;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+        }
+
+
+        /* ---------------- NUTRITION ---------------- */
+
+        .nutrition {
+            margin-top: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #d71920;
+            color: white;
+            padding: 15px;
+        }
+
+        td {
+            padding: 13px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        tr {
+            transition: 0.3s;
+        }
+
+        tr:hover {
+            background: #fff3cd;
+            transform: scale(1.01);
+        }
+
+
+        /* ---------------- FOOTER ---------------- */
+
+        footer {
+            background: #d71920;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+        }
+
+        footer span {
+            color: #ffcc00;
+            font-weight: bold;
+        }
+
+
+        /* ---------------- ANIMATIONS ---------------- */
+
+        @keyframes float {
+
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+        }
+
+        @keyframes bounce {
+
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+        }
+
+        @keyframes rotate {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+
+        /* ---------------- MOBILE ---------------- */
+
+        @media (max-width: 700px) {
+
+            .hero h1 {
+                font-size: 50px;
+            }
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero img {
+                width: 220px;
+                height: 220px;
+            }
+
+        }
+
+    </style>
 </head>
 
 
